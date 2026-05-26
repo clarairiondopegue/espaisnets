@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #fffcf6;
+    color: #000000;
+    min-height: 100vh;
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    font-size: 14.4px;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Universal scrollbar styling in Neobrutalist theme */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #fffcf6;
+    border-left: 2px solid #000000;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #000000;
+    border: 2px solid #fffcf6;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #333333;
+  }
+
+  /* Neobrutalist sleek form inputs */
+  input, select, textarea {
+    background-color: #fffcf6;
+    border: 2px solid #000000;
+    padding: 0.5rem 0.75rem;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14.4px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    background-color: #000000;
+    color: #fffcf6;
+    border-color: #000000;
+  }
+
+  /* Custom active button states */
+  button {
+    transition: all 0.2s ease-in-out;
+  }
+  button:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Float animation for the decorative elements to give subtle collage feeling */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(1.5deg);
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+    transform: translateY(0px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-1.5deg);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 9s ease-in-out infinite;
+}
