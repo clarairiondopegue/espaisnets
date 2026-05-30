@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Filter, ArrowLeft, ArrowRight, Camera, User } from 'lucide-react';
+import { Filter, ArrowRight, User } from 'lucide-react';
 
 export default function Comunitat() {
   const location = useLocation();
@@ -40,6 +40,10 @@ export default function Comunitat() {
   const [descripcio, setDescripcio] = useState('');
   const [motiu, setMotiu] = useState('');
   const [photoPreview, setPhotoPreview] = useState(null);
+  
+  // Recycling method suggestion states
+  const [metodeNom, setMetodeNom] = useState('');
+  const [metodeDesc, setMetodeDesc] = useState('');
   
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
@@ -88,6 +92,18 @@ export default function Comunitat() {
     setView('search_list');
   };
 
+  const handleMethodSubmit = (e) => {
+    e.preventDefault();
+    if (!metodeNom.trim() || !metodeDesc.trim()) {
+      alert("Si us plau, emplena tots els camps obligatoris (*).");
+      return;
+    }
+    alert(`Moltes gràcies! Hem rebut la teva proposta per al mètode: "${metodeNom}". L'equip de disseny la revisarà i la inclourem properament a l'assistent de reciclatge.`);
+    setMetodeNom('');
+    setMetodeDesc('');
+    setView('main');
+  };
+
   const handleEnrere = () => {
     if (view === 'main') {
       navigate('/');
@@ -97,38 +113,38 @@ export default function Comunitat() {
   };
 
   return (
-    <section className="relative min-h-[80vh] w-full flex flex-col items-center justify-start px-4 md:px-12 max-w-7xl mx-auto overflow-visible select-none pb-12 pt-2">
-      
-      {/* Floating Collage Decorative Elements (z-10 to be on top of comunitat-lletres but behind the cards at z-20) */}
-      <img 
-        src="/assets/wooden-letters.png" 
-        alt="Wooden letters decoration" 
-        className="absolute top-[30px] right-[-10px] sm:right-[-14px] md:right-[-17px] lg:right-[-21px] xl:right-[-25px] w-[50px] sm:w-[70px] md:w-[85px] lg:w-[105px] xl:w-[125px] pointer-events-none select-none z-10"
-      />
-      <img 
-        src="/assets/crumpled-paper.png" 
-        alt="Crumpled paper decoration" 
-        className="absolute top-[180px] left-[-13px] sm:left-[-18px] md:left-[-22px] lg:left-[-26px] xl:left-[-30px] w-[44px] sm:w-[60px] md:w-[72px] lg:w-[88px] xl:w-[100px] pointer-events-none select-none z-10"
-      />
-      <img 
-        src="/assets/wood-scraps.png" 
-        alt="Wood scraps decoration" 
-        className="absolute bottom-[40px] left-[3%] sm:left-[8%] w-[95px] sm:w-[133px] md:w-[162px] lg:w-[200px] xl:w-[238px] pointer-events-none select-none z-10"
-      />
-      <img 
-        src="/assets/3d-print.png" 
-        alt="3D print benchy decoration" 
-        className="absolute bottom-[40px] right-0 sm:right-[10px] md:right-[20px] lg:right-[30px] xl:right-[40px] w-[116px] sm:w-[160px] md:w-[193px] lg:w-[237px] xl:w-[281px] rotate-[10deg] pointer-events-none select-none z-10"
-      />
-
-      <div className="max-w-[820px] w-full mx-auto px-2 md:px-6 pt-2 pb-12 flex flex-col justify-start z-20 relative overflow-hidden">
+    <section className="relative min-h-[85vh] w-full flex flex-col items-center justify-start px-4 md:px-12 max-w-7xl mx-auto overflow-visible select-none pb-12 pt-2">
+      {/* Background Collage Images Container (Sized exactly to match Home.jsx viewport section to guarantee identical absolute positions) */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[88vh] sm:h-screen pointer-events-none select-none overflow-visible z-0">
+        <img 
+          src="/assets/wooden-letters.png" 
+          alt="Wooden letters decoration" 
+          className="absolute top-[calc(10%+80px)] right-[-10px] sm:right-[-14px] md:right-[-17px] lg:right-[-21px] xl:right-[-25px] w-[50px] sm:w-[70px] md:w-[85px] lg:w-[105px] xl:w-[125px] pointer-events-none select-none z-0"
+        />
+        <img 
+          src="/assets/crumpled-paper.png" 
+          alt="Crumpled paper decoration" 
+          className="absolute top-[calc(38%+40px)] left-[-13px] sm:left-[-18px] md:left-[-22px] lg:left-[-26px] xl:left-[-30px] w-[44px] sm:w-[60px] md:w-[72px] lg:w-[88px] xl:w-[100px] pointer-events-none select-none z-0"
+        />
+        <img 
+          src="/assets/wood-scraps.png" 
+          alt="Wood scraps decoration" 
+          className="absolute bottom-[calc(10%-80px)] left-[3%] sm:left-[8%] w-[95px] sm:w-[133px] md:w-[162px] lg:w-[200px] xl:w-[238px] pointer-events-none select-none z-0"
+        />
+        <img 
+          src="/assets/3d-print.png" 
+          alt="3D print benchy decoration" 
+          className="absolute bottom-[calc(3%-20px)] sm:bottom-[calc(5%-20px)] right-0 sm:right-[10px] md:right-[20px] lg:right-[30px] xl:right-[40px] w-[116px] sm:w-[160px] md:w-[193px] lg:w-[237px] xl:w-[281px] rotate-[10deg] pointer-events-none select-none z-0"
+        />
+      </div>
+      <div className="max-w-4xl w-full mx-auto px-2 md:px-6 pt-2 pb-12 flex flex-col justify-start z-20 relative overflow-hidden">
         
         {/* VIEW 1: MAIN HUB */}
         {view === 'main' && (
           <div className="flex flex-col items-center w-full animate-fade-in z-20 relative">
             
             {/* 1. Top Element: Letters in Collage Format inside a fixed-height container to prevent shifting other elements when scaled */}
-            <div className="w-full h-[80px] sm:h-[100px] md:h-[120px] relative flex justify-center items-center overflow-visible z-0 mt-4">
+            <div className="w-full h-[80px] sm:h-[100px] md:h-[120px] relative flex justify-center items-center overflow-visible z-0 mt-1">
               <img 
                 src="/assets/comunitat-lletres.png" 
                 alt="Comunitat" 
@@ -137,63 +153,90 @@ export default function Comunitat() {
             </div>
 
             {/* 2. Subtitle - placed below the letters container with top margin to account for visual overflow of scaled letters */}
-            <p className="font-normal text-sm sm:text-base text-neutral-800 leading-relaxed text-center max-w-2xl mt-[-4px] sm:mt-[4px] md:mt-[12px] z-20 relative">
-              Col·labora amb altres creadors i troba noves formes d'allargar la vida útil dels teus residus
+            <p className="font-normal text-sm sm:text-base text-neutral-800 leading-relaxed text-center max-w-2xl mx-auto mt-[-28px] sm:mt-[-20px] md:mt-[-12px] z-20 relative">
+              Col·labora amb altres creadors i uneix-te a la comunitat
             </p>
 
-            {/* 3. Two Main Cards Grid - placed below subtitle with a 5mm reduced (mt-3) margin */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full mt-3 z-20 relative">
-              
-              {/* Left Card: Buscar Creadors */}
-              <div 
-                onClick={() => setView('search_list')}
-                className="border-2 border-black bg-[#fffcf6] text-black p-8 flex flex-col justify-between items-start cursor-pointer transition-all duration-300 group min-h-[260px] relative z-20"
-              >
-                <div className="flex flex-col gap-3 text-left">
-                  <h3 className="font-extrabold text-lg sm:text-xl uppercase tracking-tight transition-colors duration-300">
-                    Vols trobar noves relacions professionals?
-                  </h3>
-                  <p className="font-medium text-xs sm:text-sm text-neutral-700 leading-relaxed transition-colors duration-300">
-                    Busca creadors que s'ajustin al que necessites i contacta amb ells per crear noves sinèrgies
-                  </p>
+            {/* 3. Single Large Card divided into three columns - placed below subtitle with a 5mm spacing (mt-5) */}
+            <div className="border-2 border-black bg-[#fffcf6] text-black w-full mt-5 z-20 relative overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-3 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black w-full">
+                
+                {/* Left Column: Buscar Creadors */}
+                <div 
+                  onClick={() => setView('search_list')}
+                  className="p-6 lg:p-7 flex flex-col justify-between items-start cursor-pointer transition-all duration-300 group min-h-[220px] relative z-20 bg-[#fffcf6]"
+                >
+                  <div className="flex flex-col gap-3 text-left">
+                    <h3 className="font-extrabold text-base sm:text-lg uppercase tracking-tight transition-colors duration-300">
+                      Vols trobar noves relacions professionals?
+                    </h3>
+                    <p className="font-medium text-xs sm:text-sm text-neutral-700 leading-relaxed transition-colors duration-300">
+                      Busca creadors que s&apos;ajustin al que necessites i contacta amb ells per crear noves sinèrgies
+                    </p>
+                  </div>
+
+                  {/* Neobrutalist Button inside Left Column */}
+                  <div className="relative group/btn inline-flex w-full mt-4">
+                    {/* Hollow offset shadow box (cream background, black border only) */}
+                    <div className="absolute inset-0 border-2 border-black bg-[#fffcf6] translate-x-[4px] translate-y-[4px] group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 transition-all duration-200"></div>
+                    <button className="relative w-full border-2 border-black bg-[#fffcf6] text-black hover:bg-black hover:text-[#fffcf6] font-bold text-[10px] sm:text-xs py-3 px-3 sm:px-4 flex items-center justify-between transition-all duration-200">
+                      <span>BUSCAR CREADORS</span>
+                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                    </button>
+                  </div>
                 </div>
 
-                {/* Neobrutalist Button inside Left Card */}
-                <div className="relative group/btn inline-flex w-full mt-6">
-                  {/* Hollow offset shadow box (cream background, black border only) */}
-                  <div className="absolute inset-0 border-2 border-black bg-[#fffcf6] translate-x-[4px] translate-y-[4px] group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 transition-all duration-200"></div>
-                  <button className="relative w-full border-2 border-black bg-[#fffcf6] text-black hover:bg-black hover:text-[#fffcf6] font-bold text-xs uppercase py-3 px-6 flex items-center justify-between transition-all duration-200">
-                    <span>BUSCAR CREADORS</span>
-                    <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-                  </button>
+                {/* Center Column: Unir-se a la Comunitat */}
+                <div 
+                  onClick={() => setView('join_form')}
+                  className="p-6 lg:p-7 flex flex-col justify-between items-start cursor-pointer transition-all duration-300 group min-h-[220px] relative z-20 bg-[#fffcf6]"
+                >
+                  <div className="flex flex-col gap-3 text-left">
+                    <h3 className="font-extrabold text-base sm:text-lg uppercase tracking-tight transition-colors duration-300">
+                      Estàs obert@ a noves oportunitats?
+                    </h3>
+                    <p className="font-medium text-xs sm:text-sm text-neutral-700 leading-relaxed transition-colors duration-300">
+                      Introdueix una descripció del teu perfil i les teves motivacions i fes que altres usuaris puguin conèixer-te i connectar amb tu
+                    </p>
+                  </div>
+
+                  {/* Neobrutalist Button inside Center Column */}
+                  <div className="relative group/btn inline-flex w-full mt-4">
+                    {/* Hollow offset shadow box (cream background, black border only) */}
+                    <div className="absolute inset-0 border-2 border-black bg-[#fffcf6] translate-x-[4px] translate-y-[4px] group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 transition-all duration-200"></div>
+                    <button className="relative w-full border-2 border-black bg-[#fffcf6] text-black hover:bg-black hover:text-[#fffcf6] font-bold text-[10px] sm:text-xs py-3 px-3 sm:px-4 flex items-center justify-between transition-all duration-200">
+                      <span>UNIR-SE A LA COMUNITAT</span>
+                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                    </button>
+                  </div>
                 </div>
+
+                {/* Right Column: Incloure mètode reciclatge */}
+                <div 
+                  onClick={() => setView('method_form')}
+                  className="p-6 lg:p-7 flex flex-col justify-between items-start cursor-pointer transition-all duration-300 group min-h-[220px] relative z-20 bg-[#fffcf6]"
+                >
+                  <div className="flex flex-col gap-3 text-left">
+                    <h3 className="font-extrabold text-base sm:text-lg uppercase tracking-tight transition-colors duration-300">
+                      Has descobert nous mètodes de reciclatge?
+                    </h3>
+                    <p className="font-medium text-xs sm:text-sm text-neutral-700 leading-relaxed transition-colors duration-300">
+                      Introdueix informació sobre el mètode de reciclatge que creus que podria ser útil per altres creadors i l&apos;inclourem a l&apos;assistent de reciclatge.
+                    </p>
+                  </div>
+
+                  {/* Neobrutalist Button inside Right Column */}
+                  <div className="relative group/btn inline-flex w-full mt-4">
+                    {/* Hollow offset shadow box (cream background, black border only) */}
+                    <div className="absolute inset-0 border-2 border-black bg-[#fffcf6] translate-x-[4px] translate-y-[4px] group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 transition-all duration-200"></div>
+                    <button className="relative w-full border-2 border-black bg-[#fffcf6] text-black hover:bg-black hover:text-[#fffcf6] font-bold text-[10px] sm:text-xs py-3 px-3 sm:px-4 flex items-center justify-between transition-all duration-200">
+                      <span>INCLOURE MÈTODE RECICLATGE</span>
+                      <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+                    </button>
+                  </div>
+                </div>
+
               </div>
-
-              {/* Right Card: Unir-se a la Comunitat */}
-              <div 
-                onClick={() => setView('join_form')}
-                className="border-2 border-black bg-[#fffcf6] text-black p-8 flex flex-col justify-between items-start cursor-pointer transition-all duration-300 group min-h-[260px] relative z-20"
-              >
-                <div className="flex flex-col gap-3 text-left">
-                  <h3 className="font-extrabold text-lg sm:text-xl uppercase tracking-tight transition-colors duration-300">
-                    Estàs obert@ a noves oportunitats?
-                  </h3>
-                  <p className="font-medium text-xs sm:text-sm text-neutral-700 leading-relaxed transition-colors duration-300">
-                    Introdueix una descripció del teu perfil i les teves motivacions i fes que altres usuaris puguin conèixer-te i connectar amb tu
-                  </p>
-                </div>
-
-                {/* Neobrutalist Button inside Right Card */}
-                <div className="relative group/btn inline-flex w-full mt-6">
-                  {/* Hollow offset shadow box (cream background, black border only) */}
-                  <div className="absolute inset-0 border-2 border-black bg-[#fffcf6] translate-x-[4px] translate-y-[4px] group-hover/btn:translate-x-0 group-hover/btn:translate-y-0 transition-all duration-200"></div>
-                  <button className="relative w-full border-2 border-black bg-[#fffcf6] text-black hover:bg-black hover:text-[#fffcf6] font-bold text-xs uppercase py-3 px-6 flex items-center justify-between transition-all duration-200">
-                    <span>UNIR-SE A LA COMUNITAT</span>
-                    <ArrowRight className="w-4 h-4 stroke-[2.5]" />
-                  </button>
-                </div>
-              </div>
-
             </div>
           </div>
         )}
@@ -300,6 +343,66 @@ export default function Comunitat() {
                     </button>
                   </div>
 
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+        )}
+
+        {/* VIEW 4: METHOD SUGGESTION FORM */}
+        {view === 'method_form' && (
+          <div className="w-full flex flex-col gap-4 animate-fade-in">
+            
+            {/* Form Neobrutalist Box */}
+            <div className="border-2 border-black bg-[#fffcf6] text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] w-full">
+              
+              {/* Header inside the box */}
+              <div className="border-b-2 border-black py-4 px-6 text-left">
+                <h2 className="font-extrabold text-lg sm:text-xl uppercase tracking-tight text-black">
+                  INCLOURE MÈTODE DE RECICLATGE
+                </h2>
+              </div>
+
+              {/* Form Content */}
+              <form onSubmit={handleMethodSubmit} className="p-6 md:p-8 flex flex-col gap-5">
+                
+                {/* Metode/Tecnologia Input */}
+                <div className="flex flex-col gap-1 items-start w-full">
+                  <input 
+                    type="text" 
+                    placeholder="...Nom del mètode o tecnologia de reciclatge*" 
+                    value={metodeNom}
+                    onChange={(e) => setMetodeNom(e.target.value)}
+                    className="w-full bg-[#fffcf6] border-2 border-black py-3.5 px-4 text-black placeholder-neutral-500 font-semibold text-xs sm:text-sm focus:bg-black focus:text-[#fffcf6] focus:placeholder-neutral-400 focus:outline-none transition-all duration-200"
+                    required
+                  />
+                </div>
+
+                {/* Descripció Textarea */}
+                <div className="flex flex-col gap-1 items-start w-full">
+                  <textarea 
+                    placeholder="...Descriu detalladament el funcionament d'aquest mètode, els materials aplicables i com creus que pot beneficiar altres creadors*" 
+                    value={metodeDesc}
+                    onChange={(e) => setMetodeDesc(e.target.value)}
+                    rows={6}
+                    className="w-full bg-[#fffcf6] border-2 border-black py-3.5 px-4 text-black placeholder-neutral-500 font-semibold text-xs sm:text-sm focus:bg-black focus:text-[#fffcf6] focus:placeholder-neutral-400 focus:outline-none transition-all duration-200 resize-none"
+                    required
+                  />
+                </div>
+
+                {/* Submit Button */}
+                <div className="relative group inline-flex self-end w-full md:w-auto mt-2">
+                  {/* Hollow offset shadow box (cream background, black border only) */}
+                  <div className="absolute inset-0 border-2 border-black bg-[#fffcf6] translate-x-[4px] translate-y-[4px]"></div>
+                  <button 
+                    type="submit" 
+                    className="relative w-full md:w-auto border-2 border-black bg-black text-[#fffcf6] hover:bg-[#fffcf6] hover:text-black font-extrabold text-xs uppercase py-3.5 px-8 transition-all duration-200 cursor-pointer text-center"
+                  >
+                    ENVIAR PROPOSTA
+                  </button>
                 </div>
 
               </form>

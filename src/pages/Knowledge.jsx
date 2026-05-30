@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
 export default function Knowledge() {
-  const [activeSection, setActiveSection] = useState(1);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [activeSection, setActiveSection] = useState(1);
+  const [activeTechTab, setActiveTechTab] = useState('FDM / FFF');
+
+  useEffect(() => {
+    if (location.state && location.state.activeSection) {
+      setActiveSection(location.state.activeSection);
+    }
+  }, [location.state]);
 
   const handleEnrere = () => {
     navigate('/');
@@ -14,33 +22,60 @@ export default function Knowledge() {
     { id: 1, title: "1. Impacte Ocult" },
     { id: 2, title: "2. El mite del PLA" },
     { id: 3, title: "3. Disseny Conscient" },
-    { id: 4, title: "4. Maquinària Local" }
+    { id: 4, title: "4. Maquinària Local" },
+    { id: 5, title: "5. Tecnologies i Materials" }
   ];
 
   return (
-    <div className="max-w-4xl w-full mx-auto px-4 md:px-6 py-12 flex flex-col gap-8 flex-grow z-20">
+    <section className="relative min-h-[85vh] w-full flex flex-col items-center justify-start px-4 md:px-12 max-w-7xl mx-auto overflow-visible select-none pb-12 pt-2">
+      {/* Background Collage Images Container (Sized exactly to match Home.jsx viewport section to guarantee identical absolute positions) */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[88vh] sm:h-screen pointer-events-none select-none overflow-visible z-0">
+        <img 
+          src="/assets/wooden-letters.png" 
+          alt="Wooden letters decoration" 
+          className="absolute top-[calc(10%+80px)] right-[-10px] sm:right-[-14px] md:right-[-17px] lg:right-[-21px] xl:right-[-25px] w-[50px] sm:w-[70px] md:w-[85px] lg:w-[105px] xl:w-[125px] pointer-events-none select-none z-0"
+        />
+        <img 
+          src="/assets/crumpled-paper.png" 
+          alt="Crumpled paper decoration" 
+          className="absolute top-[calc(38%+40px)] left-[-13px] sm:left-[-18px] md:left-[-22px] lg:left-[-26px] xl:left-[-30px] w-[44px] sm:w-[60px] md:w-[72px] lg:w-[88px] xl:w-[100px] pointer-events-none select-none z-0"
+        />
+        <img 
+          src="/assets/wood-scraps.png" 
+          alt="Wood scraps decoration" 
+          className="absolute bottom-[calc(10%-80px)] left-[3%] sm:left-[8%] w-[95px] sm:w-[133px] md:w-[162px] lg:w-[200px] xl:w-[238px] pointer-events-none select-none z-0"
+        />
+        <img 
+          src="/assets/3d-print.png" 
+          alt="3D print benchy decoration" 
+          className="absolute bottom-[calc(3%-20px)] sm:bottom-[calc(5%-20px)] right-0 sm:right-[10px] md:right-[20px] lg:right-[30px] xl:right-[40px] w-[116px] sm:w-[160px] md:w-[193px] lg:w-[237px] xl:w-[281px] rotate-[10deg] pointer-events-none select-none z-0"
+        />
+      </div>
+      <div className="max-w-4xl w-full mx-auto px-4 md:px-6 pt-2 pb-12 flex flex-col justify-start z-20 relative overflow-visible">
       
-      {/* 1. Header Section */}
-      <div className="flex flex-col gap-3 text-left w-full relative z-20 mt-2">
+      {/* 1. Page Header (Hero Section - letters scaled 1.5x larger, then reduced by 10%) */}
+      <div className="w-full h-[80px] sm:h-[100px] md:h-[120px] relative flex justify-center items-center overflow-visible z-0 mt-1">
         <img 
           src="/assets/aprofundeix-lletres.png" 
           alt="Aprofundeix" 
-          className="h-[63px] sm:h-[84px] md:h-[105px] w-auto object-contain pointer-events-none select-none self-start"
+          className="absolute h-full w-auto object-contain pointer-events-none select-none z-0 origin-center scale-[0.608] sm:scale-[0.72] md:scale-[0.848]"
         />
-        <p className="font-semibold text-xs text-neutral-500 uppercase tracking-widest leading-relaxed">
-          // Formació i aprenentatge sobre sostenibilitat digital en espais de fabricació
-        </p>
       </div>
 
-      {/* 2. Tab-based Sub-navigation Menu (Flat single rectangles with no shadows) */}
-      <nav className="grid grid-cols-2 md:grid-cols-4 gap-3 w-full relative z-20">
+      {/* 2. Subtitle (Top margin reduced by 5mm/20px to compress vertical gap, centered horizontally with mx-auto) */}
+      <p className="font-normal text-sm sm:text-base text-neutral-800 leading-relaxed text-center max-w-2xl mx-auto mt-[-28px] sm:mt-[-20px] md:mt-[-12px] z-20 relative italic">
+        Formació i aprenentatge sobre sostenibilitat digital en espais de fabricació
+      </p>
+
+      {/* 2. Tab-based Sub-navigation Menu (Flat single rectangles with no shadows, responsive grid) */}
+      <nav className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 w-full relative z-20 mt-5">
         {sections.map((sec) => {
           const isActive = activeSection === sec.id;
           return (
             <button
               key={sec.id}
               onClick={() => setActiveSection(sec.id)}
-              className={`border-2 border-black py-3 px-4 font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 cursor-pointer select-none text-center rounded-none ${
+              className={`border-2 border-black py-3 px-2 sm:px-4 font-bold text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 cursor-pointer select-none text-center rounded-none ${
                 isActive 
                   ? 'bg-black text-[#fffcf6] border-black' 
                   : 'bg-[#fffcf6] text-black hover:bg-neutral-50'
@@ -53,7 +88,7 @@ export default function Knowledge() {
       </nav>
 
       {/* 3. Main Content Card (Flat container with no double-rectangle shadow) */}
-      <div className="border-2 border-black bg-[#fffcf6] p-6 md:p-10 text-left flex flex-col gap-6 relative z-20 animate-fade-in min-h-[380px]">
+      <div className="border-2 border-black bg-[#fffcf6] p-6 md:p-10 text-left flex flex-col gap-6 relative z-20 animate-fade-in min-h-[380px] mt-6">
         
         {/* CONDITIONAL RENDERED SECTIONS */}
 
@@ -243,10 +278,252 @@ export default function Knowledge() {
           </div>
         )}
 
+        {/* SECTION 5: TECNOLOGIES I MATERIALS */}
+        {activeSection === 5 && (
+          <div className="flex flex-col gap-6 animate-fade-in">
+            <div className="border-b-2 border-black pb-4">
+              <h2 className="font-extrabold text-lg sm:text-xl uppercase tracking-tight text-black">
+                5. TECNOLOGIES I MATERIALS
+              </h2>
+            </div>
+
+            <p className="font-medium text-xs sm:text-sm text-neutral-800 leading-relaxed">
+              Els espais de fabricació digital treballen amb un rang de materials molt ampli que cal analitzar individualment per entendre les seves propietats i la seva reciclabilitat. Tenint en compte que els residus principals són plàstics i fustes, a continuació es desglossen els materials segons la tecnologia utilitzada.
+            </p>
+
+            {/* Sub-tabs Navigation Menu */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2 w-full mt-2 relative z-20">
+              {["FDM / FFF", "PBF", "SLA", "Tall Làser", "Fresat CNC", "Tall de Vinil"].map((tech) => {
+                const isTechActive = activeTechTab === tech;
+                return (
+                  <button
+                    key={tech}
+                    onClick={() => setActiveTechTab(tech)}
+                    className={`border border-black py-2 px-1 font-bold text-[10px] sm:text-xs uppercase tracking-wider flex items-center justify-center transition-all duration-200 cursor-pointer select-none text-center rounded-none ${
+                      isTechActive 
+                        ? 'bg-black text-[#fffcf6] border-black' 
+                        : 'bg-transparent text-black hover:bg-gray-100'
+                    }`}
+                  >
+                    <span>{tech}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Sub-tab Content Area */}
+            <div className="flex flex-col gap-5 mt-4 p-5 border border-black bg-[#fffcf6]">
+              {activeTechTab === 'FDM / FFF' && (
+                <div className="flex flex-col gap-4 animate-fade-in">
+                  <p className="font-bold text-xs sm:text-sm text-neutral-800 leading-relaxed italic border-l-2 border-black pl-4">
+                    És la tecnologia més estesa als espais de creació. Funciona fonent un filament de polímer termoplàstic capa per capa per construir una peça tridimensional.
+                  </p>
+                  
+                  <div className="flex flex-col gap-4 mt-2">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        PLA (Àcid Polilàctic)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        És un polímer <strong>d'origen biològic</strong> (fet de sucres i midons). S'utilitza massivament per a prototips perquè no és tòxic, requereix un <strong>65% menys d'energia</strong> per fabricar-se i genera un <strong>68% menys de gasos</strong> d'efecte hivernacle. Tot i això, és fràgil, s'estova a baixes temperatures i requereix un control tèrmic molt exacte. Encara que es ven com a "biodegradable", necessita <strong>instal·lacions de compostatge industrial</strong> (90 dies a 50-60 °C) i pot trigar fins a <strong>5 anys a degradar-se</strong> a la natura. Mecànicament es degrada ràpid: després de dos cicles de reciclatge <strong>perd fins a un 25% de resistència</strong>. Les opcions reals per reciclar-lo són reprocessar-lo al laboratori per a peces de baixa exigència (làmines, injecció) o separar-lo estrictament per enviar-lo a un <strong>Punt Verd o gestor especialitzat</strong>.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        ABS (Acrilonitril Butadiè Estirè)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        És un plàstic <strong>derivat del petroli</strong> molt utilitzat en la indústria per la seva tenacitat i resistència mecànica. És ideal per a peces funcionals sotmeses a estrès mecànic. El seu reciclatge a petita escala és altament desaconsellat perquè <strong>emet fums tòxics en fondre's</strong>. A nivell industrial aguanta bé fins a <strong>tres cicles de reciclatge</strong> si es barreja amb material verge, però al laboratori l'única opció de circularitat és <strong>dissoldre restes amb acetona</strong> per fer pasta adhesiva.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        PETG (Tereftalat de Polietilè Glicotitzat)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Destaca per la seva <strong>resistència química</strong>, a la humitat i a l'impacte. A l'hora de reciclar-lo és un <strong>plàstic Tipus 7</strong>. Barrejar-lo amb PET pur (ampolles d'aigua comunes) <strong>arruïna el reciclatge d'aquest últim</strong>, acabant sovint a l'abocador. A més, <strong>absorbeix molta humitat</strong>. La millor opció local és assecar-lo bé i fer-ne planxes o filament nou, o portar els residus a la deixalleria com a <strong>plàstic especial</strong>.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        TPU (Poliuretà Termoplàstic)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Pertany a la família dels <strong>elastòmers</strong> i destaca per la flexibilitat. La seva naturalesa elàstica <strong>encalla les trituradores locals</strong>, fent gairebé impossible el seu reciclatge al laboratori. La via més eficaç és crear una <strong>"xarxa consorciada"</strong> entre diferents espais maker per acumular prou residu i enviar-lo a <strong>plantes industrials</strong>.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        PC (Policarbonat)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Plàstic d'enginyeria transparent, rígid i <strong>extremadament resistent</strong> a l'impacte i a la calor. El seu reciclatge local és inviable: és <strong>massa dur per a les trituradores petites</strong> i perd dràsticament la resistència a la compressió. S'ha de <strong>gestionar externament</strong>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTechTab === 'PBF' && (
+                <div className="flex flex-col gap-4 animate-fade-in">
+                  <p className="font-bold text-xs sm:text-sm text-neutral-800 leading-relaxed italic border-l-2 border-black pl-4">
+                    Aquesta tecnologia utilitza un làser per fondre i fusionar pols de polímer. La pols no fosa serveix de suport natural per a la peça.
+                  </p>
+                  
+                  <div className="flex flex-col gap-4 mt-2">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        Nylon / PA12 (Poliamida)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        És el rei de la tecnologia PBF per la seva <strong>biocompatibilitat</strong> i resistència al desgast. Crea peces finals funcionals. El residu principal és la pols no fosa o semifusa. L'exposició prolongada a la calor <strong>"envelleix" tèrmicament</strong> la pols. Es pot reutilitzar barrejant un <strong>30-50% de pols verge</strong> amb la degradada, o bé <strong>convertir la pols sobrant en filament</strong> per a impressores FFF.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        TPU (Poliuretà Termoplàstic)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Pertany a la família dels <strong>elastòmers</strong> i destaca per la flexibilitat. La seva naturalesa elàstica <strong>encalla les trituradores locals</strong>, fent gairebé impossible el seu reciclatge al laboratori. La via més eficaç és crear una <strong>"xarxa consorciada"</strong> entre diferents espais maker per acumular prou residu i enviar-lo a <strong>plantes industrials</strong>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTechTab === 'SLA' && (
+                <div className="flex flex-col gap-4 animate-fade-in">
+                  <p className="font-bold text-xs sm:text-sm text-neutral-800 leading-relaxed italic border-l-2 border-black pl-4">
+                    Utilitza llum UV per curar (endurir) líquids fotopolimeritzables capa per capa, aconseguint una precisió i un detall extrems.
+                  </p>
+                  
+                  <div className="flex flex-col gap-4 mt-2">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        Resines Termoestables
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        A diferència dels plàstics comuns (que es fonen), aquestes resines líquides creen <strong>enllaços químics irreversibles</strong>. Això vol dir que si s'escalfen, <strong>se cremen, no es fonen</strong>. La seva naturalesa fa <strong>impossible re-fondre-les</strong>. El reciclatge mecànic industrial implica triturar les peces fallides fins a fer-ne pols per a <strong>càrrega estructural</strong>. L'Alcohol Isopropílic (IPA) usat per netejar es satura de resina tòxica; s'hauria de <strong>destil·lar per recuperar-ne el 85%</strong>, tractant la resta com a <strong>residu perillós</strong>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTechTab === 'Tall Làser' && (
+                <div className="flex flex-col gap-4 animate-fade-in">
+                  <p className="font-bold text-xs sm:text-sm text-neutral-800 leading-relaxed italic border-l-2 border-black pl-4">
+                    Màquines que utilitzen un feix de llum d'alta potència per tallar o gravar planxes de materials plans.
+                  </p>
+                  
+                  <div className="flex flex-col gap-4 mt-2">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        Cartró
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        És el <strong>material més recomanat</strong> i ecològic. S'ha de <strong>prioritzar sempre</strong> per a les primeres iteracions. El seu reciclatge és tan senzill com dipositar-lo al <strong>contenidor blau</strong>.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        Contraxapat
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Tauler format per múltiples capes de fusta natural unides amb adhesius. Té un <strong>alt impacte ambiental</strong> per les coles i resines que conté; si es barregen amb fusta natural neta, <strong>contaminen tot el procés</strong> de reciclatge. La prioritat és portar els residus a la deixalleria <strong>sense barrejar-los</strong>.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        MDF (Tauler de Fibra de Densitat Mitjana)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Creat aglutinant fibres de fusta i resines. L'adhesiu més comú és l'urea-formaldehid, que és <strong>cancerigen</strong> i dificulta enormement el reciclatge. La millor opció d'ús és buscar <strong>planxes NAF</strong> (sense formaldehid afegit) i portar els residus a la deixalleria per a processos industrials tancats.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        PMMA (Metacrilat)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Termoplàstic rígid i transparent com el vidre. A nivell industrial es pot despolimeritzar <strong>recuperant el 97%</strong> del material, però a la realitat <strong>només el 10% mundial es recicla</strong>. Al laboratori, l'única via és <strong>optimitzar els talls</strong> per no generar mermes i portar els retalls a la deixalleria.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTechTab === 'Fresat CNC' && (
+                <div className="flex flex-col gap-4 animate-fade-in">
+                  <p className="font-bold text-xs sm:text-sm text-neutral-800 leading-relaxed italic border-l-2 border-black pl-4">
+                    Màquines de mecanitzat subtractiu que utilitzen broques rotatòries per rebaixar blocs de material i esculpir formes.
+                  </p>
+                  
+                  <div className="flex flex-col gap-4 mt-2">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        Contraxapat
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Tauler format per múltiples capes de fusta natural unides amb adhesius. Té un <strong>alt impacte ambiental</strong> per les coles i resines que conté; si es barregen amb fusta natural neta, <strong>contaminen tot el procés</strong> de reciclatge. La prioritat és portar els residus a la deixalleria <strong>sense barrejar-los</strong>.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        MDF (Tauler de Fibra de Densitat Mitjana)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Creat aglutinant fibres de fusta i resines. L'adhesiu més comú és l'urea-formaldehid, que és <strong>cancerigen</strong> i dificulta enormement el reciclatge. La millor opció d'ús és buscar <strong>planxes NAF</strong> (sense formaldehid afegit) i portar els residus a la deixalleria per a processos industrials tancats.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        PMMA (Metacrilat)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        Termoplàstic rígid i transparent com el vidre. A nivell industrial es pot despolimeritzar <strong>recuperant el 97%</strong> del material, però a la realitat <strong>només el 10% mundial es recicla</strong>. Al laboratori, l'única via és <strong>optimitzar els talls</strong> per no generar mermes i portar els retalls a la deixalleria.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTechTab === 'Tall de Vinil' && (
+                <div className="flex flex-col gap-4 animate-fade-in">
+                  <p className="font-bold text-xs sm:text-sm text-neutral-800 leading-relaxed italic border-l-2 border-black pl-4">
+                    Plotters amb una petita fulla rotatòria guiada per ordinador que talla patrons sobre rotlles de material prim adhesiu.
+                  </p>
+                  
+                  <div className="flex flex-col gap-4 mt-2">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-extrabold text-xs sm:text-sm text-black uppercase tracking-wide">
+                        PVC (Vinil Adhesiu)
+                      </span>
+                      <p className="font-medium text-xs text-neutral-700 leading-relaxed">
+                        És el plàstic més utilitzat per a senyalística i adhesius. De la mateixa manera que les planxes rígides de PVC, el vinil adhesiu és <strong>impossible de reciclar a un espai maker</strong> i té un <strong>alt impacte per la seva toxicitat</strong> si es crema o es fon. Els retalls s'han de gestionar a la deixalleria. L'acció més sostenible és canviar-lo per opcions <strong>"PVC-Free Vinyl"</strong> (basades en PET o PP).
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
       </div>
 
       {/* 4. Global Navigation Layout Element */}
-      <div className="flex justify-start w-full relative z-20">
+      <div className="flex justify-start w-full relative z-20 mt-6">
         <button
           onClick={handleEnrere}
           className="font-bold text-xs uppercase tracking-wider text-neutral-500 hover:text-black transition-colors duration-200 py-2 flex items-center gap-1.5 border-none bg-transparent cursor-pointer"
@@ -256,6 +533,7 @@ export default function Knowledge() {
         </button>
       </div>
 
-    </div>
+      </div>
+    </section>
   );
 }

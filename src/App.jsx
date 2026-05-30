@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Assistant from './pages/Assistant';
 import Comunitat from './pages/Comunitat';
+import Inspirat from './pages/Inspirat';
 import Knowledge from './pages/Knowledge';
 import { ShieldAlert } from 'lucide-react';
 
@@ -31,7 +32,7 @@ function NotFound() {
         to="/" 
         className="border-2 border-black bg-black text-white hover:bg-[#fffcf6] hover:text-black font-mono text-xs font-bold uppercase py-2 px-6 transition-all duration-200"
       >
-        Tornar a l'Inici
+        Tornar a l&apos;Inici
       </Link>
     </div>
   );
@@ -47,6 +48,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="assistant" element={<Assistant />} />
           <Route path="network" element={<Comunitat />} />
+          <Route path="inspirat" element={<Inspirat />} />
           <Route path="knowledge" element={<Knowledge />} />
           
           {/* 404 Wildcard Page */}

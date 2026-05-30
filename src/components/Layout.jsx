@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink, Link, Outlet } from 'react-router-dom';
 import { Search, Menu, X, Trash2, ArrowUpRight } from 'lucide-react';
 
@@ -27,6 +27,13 @@ export default function Layout() {
       rotation: '-rotate-[10deg]', 
       activeRotation: '-rotate-[4deg]', 
       hoverRotation: 'hover:-rotate-[4deg]' 
+    },
+    { 
+      path: '/inspirat', 
+      label: "Inspira't", 
+      rotation: '-rotate-[9deg]', 
+      activeRotation: '-rotate-[3deg]', 
+      hoverRotation: 'hover:-rotate-[3deg]' 
     },
     { 
       path: '/knowledge', 

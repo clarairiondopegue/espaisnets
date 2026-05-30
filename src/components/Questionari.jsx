@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, RefreshCw, ChevronRight, CheckCircle2, AlertTriangle, ShieldCheck } from 'lucide-react';
+import { RefreshCw, ChevronRight } from 'lucide-react';
 
 const DECISION_TREE = {
   "steps": {
@@ -496,9 +496,35 @@ export default function Questionari() {
 
   // 2. Final Result page view
   if (result) {
+    const isPlaResult = result === DECISION_TREE.results.pla_res;
+    const isAbsResult = result === DECISION_TREE.results.abs_res;
     return (
-      <div className="border-2 border-black grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black bg-[#fffcf6] text-black">
+      <div className="border-2 border-black grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black bg-[#fffcf6] text-black relative">
         
+        {isPlaResult && (
+          <div 
+            onClick={() => navigate('/knowledge', { state: { activeSection: 2 } })}
+            className="hidden md:block absolute -left-[155px] lg:-left-[185px] top-[40px] w-[135px] lg:w-[155px] bg-[#e5c6e6] border border-black p-3.5 text-left -rotate-[13deg] cursor-pointer z-30 select-none"
+          >
+            <p className="font-medium text-[11px] lg:text-xs text-black leading-snug">
+              Sabies que el PLA triga 5 anys a degradar-se en condicions normals?{' '}
+              <span className="underline block mt-1">Més info -&gt;</span>
+            </p>
+          </div>
+        )}
+
+        {isAbsResult && (
+          <div 
+            onClick={() => navigate('/knowledge', { state: { activeSection: 5 } })}
+            className="hidden md:block absolute -left-[155px] lg:-left-[185px] top-[40px] w-[135px] lg:w-[155px] bg-[#e5c6e6] border border-black p-3.5 text-left -rotate-[13deg] cursor-pointer z-30 select-none"
+          >
+            <p className="font-medium text-[11px] lg:text-xs text-black leading-snug">
+              Sabies que l'ABS és considerat el material més contaminant d'impressió FDM?{' '}
+              <span className="underline block mt-1">Més info -&gt;</span>
+            </p>
+          </div>
+        )}
+
         {/* Left Column: Result Header and Començar de Nou */}
         <div className="relative p-8 md:p-12 flex flex-col justify-between items-start min-h-[240px] md:h-[432px] bg-[#fffcf6]">
           {renderBreadcrumbs()}
@@ -551,7 +577,7 @@ export default function Questionari() {
               {/* 3. Primary Result Card */}
               <div className="border-2 border-[#4e6b48] bg-[#4e6b48] text-[#fffcf6] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.15)] flex flex-col w-full overflow-hidden flex-shrink-0">
                 <div className="border-t-2 border-x-2 border-b-2 border-black border-b-[#4e6b48] bg-[#fffcf6] text-black font-extrabold text-[9px] uppercase tracking-wider py-1.5 px-4 text-left -mt-[2px] -mx-[2px]">
-                  //Via de gestió prioritària
+                  {"// Via de gestió prioritària"}
                 </div>
                 <div className="pt-[6mm] px-5 pb-[6mm] flex flex-col gap-3 items-start">
                   <h3 className="font-black text-sm sm:text-base leading-snug uppercase tracking-tight text-[#fffcf6] text-left">
@@ -576,7 +602,7 @@ export default function Questionari() {
                   )}
                   {result.primaria.btnAction === "Cercar Punts Verds" && (
                     <a
-                      href="https://www.residuonvas.cat/"
+                      href="https://ajuntament.barcelona.cat/neteja-i-residus/ca/recollida-domestica/xarxa-de-punts-verds"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="border-2 border-black bg-[#fffcf6] text-[#4e6b48] hover:bg-black hover:text-[#fffcf6] hover:border-black font-bold text-xs uppercase py-2 px-4 flex items-center gap-2 transition-all duration-200 mt-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none cursor-pointer self-stretch text-center justify-center"
@@ -601,7 +627,7 @@ export default function Questionari() {
                         <p className="text-xs text-neutral-600 leading-relaxed">{sec.descripcio}</p>
                         {sec.btnAction === "Cercar Punts Verds" && (
                           <a
-                            href="https://www.residuonvas.cat/"
+                            href="https://ajuntament.barcelona.cat/neteja-i-residus/ca/recollida-domestica/xarxa-de-punts-verds"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 border-2 border-black bg-black text-[#fffcf6] hover:bg-[#fffcf6] hover:text-black font-bold text-[10px] uppercase py-1.5 px-3 transition-all duration-200 mt-1 shadow-[1.5px_1.5px_0px_0px_rgba(0,0,0,1)] hover:shadow-none cursor-pointer"
@@ -648,7 +674,7 @@ export default function Questionari() {
               {/* Solution Alert Box */}
               <div className="border-2 border-black bg-black text-[#fffcf6] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.15)] flex flex-col w-full">
                 <div className="border-b-[1.5px] border-black bg-[#fffcf6] text-black font-extrabold text-[9px] uppercase tracking-wider py-1.5 px-4 text-left">
-                  // Canvi de canal generat
+                  {"// Canvi de canal generat"}
                 </div>
                 <div className="p-5 font-black text-sm sm:text-base leading-snug text-left">
                   {result.solucio}
@@ -657,7 +683,7 @@ export default function Questionari() {
 
               {/* Justification Box */}
               <div className="flex flex-col gap-2 items-start w-full">
-                <span className="font-extrabold text-[9px] uppercase tracking-wider text-neutral-400">// Justificació Tècnica:</span>
+                <span className="font-extrabold text-[9px] uppercase tracking-wider text-neutral-400">{"// Justificació Tècnica:"}</span>
                 <div className="border-2 border-black p-4 bg-[#fffcf6] text-black text-xs font-semibold leading-relaxed shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] text-left w-full">
                   {result.justificacio}
                 </div>
@@ -715,7 +741,7 @@ export default function Questionari() {
         {/* Right Column: Form fields */}
         <form onSubmit={handleAltresSubmit} className="p-8 md:p-12 flex flex-col justify-center gap-6 min-h-[176px] md:h-[432px] bg-[#fffcf6] w-full">
           <div className="flex flex-col gap-2 items-start">
-            <label className="font-extrabold text-[9px] uppercase tracking-wider text-neutral-400">// Tecnologia sugerida:</label>
+            <label className="font-extrabold text-[9px] uppercase tracking-wider text-neutral-400">{"// Tecnologia sugerida:"}</label>
             <input 
               type="text" 
               placeholder="Ex: Impressió de cera, filosa, etc." 
@@ -766,7 +792,7 @@ export default function Questionari() {
         {/* Right Column: Form fields */}
         <form onSubmit={handleAltresMaterialSubmit} className="p-8 md:p-12 flex flex-col justify-center gap-6 min-h-[176px] md:h-[432px] bg-[#fffcf6] w-full">
           <div className="flex flex-col gap-2 items-start">
-            <label className="font-extrabold text-[9px] uppercase tracking-wider text-neutral-400">// Material sugerit:</label>
+            <label className="font-extrabold text-[9px] uppercase tracking-wider text-neutral-400">{"// Material sugerit:"}</label>
             <input 
               type="text" 
               placeholder="Ex: Alumini, PLA amb fusta, etc." 

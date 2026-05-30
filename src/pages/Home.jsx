@@ -1,6 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Recycle, Users, GraduationCap, ChevronRight, Sparkles } from 'lucide-react';
+import { Recycle, Users, GraduationCap, ChevronRight } from 'lucide-react';
 
 export default function Home() {
   const highlights = [
@@ -24,9 +23,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-24 pb-20 w-full overflow-x-clip relative">
 
-      {/* Hero Section (Center Alignment matching Mockup, exactly h-screen/min-h-screen) */}
       <section className="relative h-[88vh] sm:h-screen w-full flex flex-col items-center justify-center text-center px-4 md:px-12 max-w-7xl mx-auto overflow-visible select-none">
-        
         {/* Floating Collage Decorative Elements (Inside the h-screen container, no animations, smaller sizing) */}
         <img 
           src="/assets/wooden-letters.png" 
@@ -88,7 +85,7 @@ export default function Home() {
         {/* Grid Highlights Section */}
         <section className="flex flex-col gap-8 w-full">
           <h2 className="font-bold text-xs uppercase tracking-widest border-b-2 border-black pb-2 text-black/75">
-            // Objectius del Sistema
+            {"// Funcionalitats de la web"}
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -136,7 +133,7 @@ export default function Home() {
             to="/assistant" 
             className="flex items-center gap-2 border-2 border-black bg-black text-[#fffcf6] px-6 py-3 font-bold text-xs uppercase hover:bg-[#fffcf6] hover:text-black hover:border-black transition-all duration-200 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
           >
-            <span>Anar a l'Assistent</span>
+            <span>Anar a l&apos;Assistent</span>
             <ChevronRight className="w-4 h-4 stroke-[2.5]" />
           </Link>
         </section>
