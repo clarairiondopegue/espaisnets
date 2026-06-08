@@ -61,6 +61,7 @@ export default function Layout() {
             <NavLink
               key={link.path}
               to={link.path}
+              state={link.path === '/network' ? { view: 'main' } : undefined}
               className={({ isActive }) => 
                 `text-neutral-500 hover:text-black transition-colors duration-200 cursor-pointer select-none ${isActive ? 'text-black underline underline-offset-4 decoration-2 font-medium' : ''}`
               }
@@ -131,6 +132,7 @@ export default function Layout() {
               <NavLink
                 key={link.path}
                 to={link.path}
+                state={link.path === '/network' ? { view: 'main' } : undefined}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) => {
                   const baseStyles = "block w-full border-[1.5px] border-black py-2 px-6 text-center font-medium text-sm transition-all duration-300";

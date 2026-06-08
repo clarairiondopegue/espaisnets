@@ -79,6 +79,7 @@ const DECISION_TREE = {
   },
   "results": {
     "pla_res": {
+      "id": "pla_res",
       "isFFF": true,
       "primaria": {
         "titol": "Reciclatge mecànic a nivell local",
@@ -91,6 +92,7 @@ const DECISION_TREE = {
       ]
     },
     "abs_res": {
+      "id": "abs_res",
       "isFFF": true,
       "primaria": {
         "titol": "Reciclatge químic local",
@@ -103,6 +105,7 @@ const DECISION_TREE = {
       ]
     },
     "petg_res": {
+      "id": "petg_res",
       "isFFF": true,
       "warning": "No barrejar el PETG amb PET perquè contamina tot el procés de reciclatge.",
       "primaria": {
@@ -116,9 +119,10 @@ const DECISION_TREE = {
       ]
     },
     "tpu_fff_res": {
+      "id": "tpu_fff_res",
       "isFFF": true,
       "primaria": {
-        "titol": "Enviar a gestors externs de reciclatge que generen filament",
+        "titol": "Enviar a gestors externs de reciclatge",
         "descripcio": "No es recomanable reciclar el TPU a nivell local ja que la seva naturalesa flexible impedeix que es trituri i fongui bé. Existeixen gestors externs que reciclen el TPU per convertir-lo de nou en filament.",
         "linkAction": "Xarxa Maker"
       },
@@ -127,9 +131,10 @@ const DECISION_TREE = {
       ]
     },
     "pc_res": {
+      "id": "pc_res",
       "isFFF": true,
       "primaria": {
-        "titol": "Enviar a gestors externs de reciclatge per al seu reciclatge",
+        "titol": "Enviar a gestors externs de reciclatge",
         "descripcio": "No es recomanable reciclar a nivell local el PC degut a les altes temperatures de fusió del material i la màquinaria industrial especialitzada. Existeixen gestors externs que reciclen el PC.",
         "linkAction": "Xarxa Maker"
       },
@@ -138,6 +143,7 @@ const DECISION_TREE = {
       ]
     },
     "pbf_viable_res": {
+      "id": "pbf_viable_res",
       "primaria": {
         "titol": "Reutilització directa a la mateixa màquina",
         "descripcio": "La pols no fosa és viable per tornar a imprimir afegint entre un 30% i un 50% de material verge (taxa de refresc)."
@@ -151,6 +157,7 @@ const DECISION_TREE = {
       ]
     },
     "pbf_inutilitzable_res": {
+      "id": "pbf_inutilitzable_res",
       "primaria": {
         "titol": "Portar-ho al Punt Verd o Deixalleria",
         "descripcio": "La pols semifusa o barrejada són inutilitzables per a la impressió i l'única via viable és descartar-les de forma segura.",
@@ -158,6 +165,7 @@ const DECISION_TREE = {
       }
     },
     "pbf_solid_res": {
+      "id": "pbf_solid_res",
       "primaria": {
         "titol": "Enviar a gestors externs de reciclatge",
         "descripcio": "A nivell local no es poden reciclar perquè són molt difícils de triturar: el TPU encalla les màquines i la PA12 és massa dura.",
@@ -172,6 +180,7 @@ const DECISION_TREE = {
       ]
     },
     "sla_liquid_res": {
+      "id": "sla_liquid_res",
       "warning": "L'alcohol IPA saturat i la resina líquida són residus perillosos. Prohibit llençar pel desguàs.",
       "primaria": {
         "titol": "Inactivació i Destil·lació Local",
@@ -186,9 +195,11 @@ const DECISION_TREE = {
       ]
     },
     "sla_solid_res": {
+      "id": "sla_solid_res",
       "primaria": {
         "titol": "Enviar a gestors externs de reciclatge",
-        "descripcio": "La resina curada és un material termoestable. Com que no es pot fondre, una opció de reciclatge possible és la seva trituració per generar farciment estructural."
+        "descripcio": "La resina curada és un material termoestable. Com que no es pot fondre, una opció de reciclatge possible és la seva trituració per generar farciment estructural.",
+        "linkAction": "Xarxa Maker"
       },
       "secundaries": [
         {
@@ -199,6 +210,7 @@ const DECISION_TREE = {
       ]
     },
     "mdf_res": {
+      "id": "mdf_res",
       "primaria": {
         "titol": "Reutilització directa dels retalls sobrants",
         "descripcio": "La millor gestió passa per reutilitzar els retalls sobrants en altres projectes de tall làser"
@@ -212,6 +224,7 @@ const DECISION_TREE = {
       ]
     },
     "pmma_res": {
+      "id": "pmma_res",
       "eduText": "El reciclatge industrial del metacrilat permet una recuperació del 97% del monòmer MMA a temperatures relativament baixes.",
       "primaria": {
         "titol": "Reutilització directa dels retalls sobrants",
@@ -226,6 +239,7 @@ const DECISION_TREE = {
       ]
     },
     "cnc_mdf_res": {
+      "id": "cnc_mdf_res",
       "eduText": "La reutilització de MDF per obtenir plaques d'aïllament tèrmic i acústic ha demostrat ser factible, substituint materials com la llana mineral, poliestirè i poliuretà.",
       "primaria": {
         "titol": "Portar-ho al punt verd o deixalleria",
@@ -234,6 +248,7 @@ const DECISION_TREE = {
       }
     },
     "cnc_pmma_res": {
+      "id": "cnc_pmma_res",
       "eduText": "El reciclatge industrial del metacrilat permet una recuperació del 97% del monòmer MMA a temperatures relativament baixes.",
       "primaria": {
         "titol": "Portar-ho al punt verd o deixalleria",
@@ -242,6 +257,7 @@ const DECISION_TREE = {
       }
     },
     "vinil_res": {
+      "id": "vinil_res",
       "warning": "Els residus de PVC són tòxics i cal separar-los correctament.",
       "eduText": "Existeixen altres vinils més sostenibles lliures de PVC, com els basats en PET o PP.",
       "primaria": {
@@ -251,8 +267,9 @@ const DECISION_TREE = {
       }
     },
     "contaminat_res": {
+      "id": "contaminat_res",
       "solucio": "Segregació al Punt Verd / Rebuig",
-      "justificacio": "Risc extrem de contaminació creuada o trencament de ganivetes per inserts metàl·lics."
+      "justificacio": "No es pot recomanar una via de reciclatge per un material d'origen desconegut, ja que suposa un alt risc de contaminar altres residus. Et recomanem portar-lo a un Punt Verd per intentar identificar el tipus de residu o, si no és possible, destina'l al rebuig com a mesura de precaució."
     }
   }
 };
@@ -281,16 +298,76 @@ const getBreadcrumbLabel = (text) => {
   return text;
 };
 
+const getSessionValue = (key, defaultValue) => {
+  try {
+    const item = sessionStorage.getItem(`assistant_${key}`);
+    return item !== null ? JSON.parse(item) : defaultValue;
+  } catch {
+    return defaultValue;
+  }
+};
+
+const getSafetyText = (titol) => {
+  if (!titol) return null;
+  const t = titol.toLowerCase().trim();
+  if (t === "reciclatge mecànic a nivell local") {
+    return (
+      <div className="flex flex-col gap-2">
+        <p>Si utilitzes maquinària com la trituradora, l'extrusora o la premsa laminadora, és obligatori l'ús d'EPIs.</p>
+        <div className="flex flex-col gap-1.5 my-1">
+          <p className="font-bold underline text-xs">EPIs necessaris:</p>
+          <ul className="list-disc pl-5 flex flex-col gap-1">
+            <li>Guants de protecció tèrmica o mecànica (segons el cas)</li>
+            <li>Ulleres contra impactes</li>
+            <li>Protecció auditiva (per a la trituradora)</li>
+          </ul>
+        </div>
+        <p>A més, com que el procés de fusió de plàstics emet gasos, és imprescindible treballar en un espai amb extracció de fums o una ventilació creuada excel·lent.</p>
+      </div>
+    );
+  }
+  if (t === "reciclatge químic local") {
+    return (
+      <div className="flex flex-col gap-2">
+        <p>L'ús de dissolvents com l'acetona implica un risc alt d'inflamabilitat i toxicitat per vapors. Aquest procés s'ha de fer obligatòriament en un espai amb bona ventilació.</p>
+        <div className="flex flex-col gap-1.5 my-1">
+          <p className="font-bold underline text-xs">EPIs necessaris:</p>
+          <ul className="list-disc pl-5 flex flex-col gap-1">
+            <li>Guants de nitril (el làtex es desfà)</li>
+            <li>Ulleres de protecció</li>
+            <li>Màscara amb filtre per a gasos orgànics</li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
+  if (t === "inactivació i destil·lació local") {
+    return (
+      <div className="flex flex-col gap-2">
+        <p>La resina no curada i els dissolvents per netejar-la (com l'Alcohol Isopropílic) són tòxics per contacte i inhalació. Aquest procés s'ha de fer obligatòriament en un espai amb bona ventilació.</p>
+        <div className="flex flex-col gap-1.5 my-1">
+          <p className="font-bold underline text-xs">EPIs necessaris:</p>
+          <ul className="list-disc pl-5 flex flex-col gap-1">
+            <li>Guants de nitril</li>
+            <li>Ulleres de protecció contra esquitxades</li>
+          </ul>
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
+
 export default function Questionari() {
   const navigate = useNavigate();
-  const [isLanding, setIsLanding] = useState(true);
-  const [currentStep, setCurrentStep] = useState('start');
-  const [history, setHistory] = useState([]);
-  const [result, setResult] = useState(null);
-  const [customView, setCustomView] = useState(null);
-  const [selectedTechRoute, setSelectedTechRoute] = useState(null);
-  const [altresTecnologia, setAltresTecnologia] = useState('');
-  const [altresMaterial, setAltresMaterial] = useState('');
+  const [isLanding, setIsLanding] = useState(() => getSessionValue('isLanding', true));
+  const [currentStep, setCurrentStep] = useState(() => getSessionValue('currentStep', 'start'));
+  const [history, setHistory] = useState(() => getSessionValue('history', []));
+  const [result, setResult] = useState(() => getSessionValue('result', null));
+  const [customView, setCustomView] = useState(() => getSessionValue('customView', null));
+  const [selectedTechRoute, setSelectedTechRoute] = useState(() => getSessionValue('selectedTechRoute', null));
+  const [altresTecnologia, setAltresTecnologia] = useState(() => getSessionValue('altresTecnologia', ''));
+  const [altresMaterial, setAltresMaterial] = useState(() => getSessionValue('altresMaterial', ''));
 
   const resultScrollRef = React.useRef(null);
   const fallbackScrollRef = React.useRef(null);
@@ -299,6 +376,21 @@ export default function Questionari() {
   const [showResultScrollbar, setShowResultScrollbar] = useState(false);
   const [showFallbackScrollbar, setShowFallbackScrollbar] = useState(false);
   const [showOptionsScrollbar, setShowOptionsScrollbar] = useState(false);
+
+  React.useEffect(() => {
+    try {
+      sessionStorage.setItem('assistant_isLanding', JSON.stringify(isLanding));
+      sessionStorage.setItem('assistant_currentStep', JSON.stringify(currentStep));
+      sessionStorage.setItem('assistant_history', JSON.stringify(history));
+      sessionStorage.setItem('assistant_result', JSON.stringify(result));
+      sessionStorage.setItem('assistant_customView', JSON.stringify(customView));
+      sessionStorage.setItem('assistant_selectedTechRoute', JSON.stringify(selectedTechRoute));
+      sessionStorage.setItem('assistant_altresTecnologia', JSON.stringify(altresTecnologia));
+      sessionStorage.setItem('assistant_altresMaterial', JSON.stringify(altresMaterial));
+    } catch (e) {
+      console.error('Error saving state to sessionStorage:', e);
+    }
+  }, [isLanding, currentStep, history, result, customView, selectedTechRoute, altresTecnologia, altresMaterial]);
 
   React.useEffect(() => {
     const checkScroll = () => {
@@ -496,8 +588,9 @@ export default function Questionari() {
 
   // 2. Final Result page view
   if (result) {
-    const isPlaResult = result === DECISION_TREE.results.pla_res;
-    const isAbsResult = result === DECISION_TREE.results.abs_res;
+    const isPlaResult = result && (result.id === "pla_res" || result === DECISION_TREE.results.pla_res);
+    const isAbsResult = result && (result.id === "abs_res" || result === DECISION_TREE.results.abs_res);
+    const safetyText = result.primaria ? getSafetyText(result.primaria.titol) : null;
     return (
       <div className="border-2 border-black grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-black bg-[#fffcf6] text-black relative">
         
@@ -533,7 +626,7 @@ export default function Questionari() {
               Gestió recomanada
             </h2>
             <p className="font-medium text-xs text-neutral-600 leading-relaxed max-w-sm text-left">
-              S'ha generat una via de tractament i reciclatge òptima d'acord amb la tecnologia i les especificacions del material introduït.
+              S&apos;ha generat una via de reciclatge òptima d&apos;acord amb les especificacions del residu introduït.
             </p>
           </div>
 
@@ -590,6 +683,20 @@ export default function Questionari() {
                     <p className="font-normal text-xs text-[#fffcf6] italic leading-relaxed text-left border-l-2 border-[#fffcf6] pl-3 mt-1">
                       {result.primaria.extra}
                     </p>
+                  )}
+                  {safetyText && (
+                    <details className="w-full bg-transparent text-[#fffcf6] group cursor-pointer mt-3 text-left border border-[#fffcf6] p-3 rounded-none flex-shrink-0">
+                      <summary className="font-normal text-xs select-none text-[#fffcf6] hover:opacity-85 transition-opacity duration-200 list-none [&::-webkit-details-marker]:hidden flex justify-between items-center w-full">
+                        <div className="flex items-center gap-1.5">
+                          <span>⚠️</span>
+                          <span className="underline underline-offset-4">Informació de seguretat</span>
+                        </div>
+                        <span className="transition-transform duration-200 group-open:rotate-180 text-[8px] no-underline">▼</span>
+                      </summary>
+                      <div className="pt-3 pb-0.5 text-xs font-normal leading-relaxed text-[#fffcf6] cursor-default border-t border-[#fffcf6]/30 mt-3 select-text">
+                        {safetyText}
+                      </div>
+                    </details>
                   )}
                   {result.primaria.linkAction === "Xarxa Maker" && (
                     <button
@@ -852,20 +959,18 @@ export default function Questionari() {
           </div>
 
           {/* Text Block 1 */}
-          <p className="font-normal text-xs sm:text-sm text-neutral-800 leading-relaxed text-left">
+          <p className="font-bold text-xs sm:text-sm text-neutral-800 leading-relaxed text-left">
             Per poder gestionar el residu correctament, és necessari tenir el material pur. Si és possible separar els diferents materials del residu, si us plau, separa'ls i continua el qüestionari.
           </p>
 
-          {/* Neobrutalist Button: Continuar */}
-          <div className="relative group inline-flex self-start cursor-pointer" onClick={() => handleOptionClick({ dynamicNext: true })}>
-            {/* Background shadow box */}
-            <div className="absolute inset-0 border-2 border-black bg-[#fffcf6] translate-x-[6px] translate-y-[6px] transition-all duration-300 hover:!bg-black group-hover:!bg-black"></div>
-            {/* Front button */}
-            <button className="relative border-2 border-black bg-black text-[#fffcf6] font-extrabold text-xs sm:text-sm uppercase py-3 px-6 flex items-center gap-2 transition-all duration-300 hover:-translate-x-[1px] hover:-translate-y-[1px] hover:bg-[#fffcf6] hover:text-black group-hover:-translate-x-[1px] group-hover:-translate-y-[1px] group-hover:bg-[#fffcf6] group-hover:text-black cursor-pointer">
-              <span>Continuar</span>
-              <span className="text-sm sm:text-base leading-none">➔</span>
-            </button>
-          </div>
+          {/* Button: Continuar (underlined text link) */}
+          <button 
+            type="button" 
+            onClick={() => handleOptionClick({ dynamicNext: true })}
+            className="font-normal text-xs sm:text-sm text-black underline underline-offset-4 hover:opacity-80 transition-opacity duration-200 cursor-pointer p-0 bg-transparent border-none self-start"
+          >
+            Continuar ➔
+          </button>
 
           {/* Text Block 2 */}
           <p className="font-normal text-xs sm:text-sm text-neutral-600 leading-relaxed text-left italic">

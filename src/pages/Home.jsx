@@ -133,7 +133,7 @@ export default function Home() {
             to="/assistant" 
             className="flex items-center gap-2 border-2 border-black bg-black text-[#fffcf6] px-6 py-3 font-bold text-xs uppercase hover:bg-[#fffcf6] hover:text-black hover:border-black transition-all duration-200 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-none"
           >
-            <span>Anar a l&apos;Assistent</span>
+            <span>Començar reciclatge</span>
             <ChevronRight className="w-4 h-4 stroke-[2.5]" />
           </Link>
         </section>

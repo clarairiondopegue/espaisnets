@@ -9,8 +9,10 @@ export default function Comunitat() {
   useEffect(() => {
     if (location.state?.view) {
       setView(location.state.view);
+    } else {
+      setView('main');
     }
-  }, [location.state]);
+  }, [location]);
 
   const [creators, setCreators] = useState([
     { 
@@ -47,6 +49,26 @@ export default function Comunitat() {
   
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+
+  const creatorsScrollRef = useRef(null);
+  const [showCreatorsScrollbar, setShowCreatorsScrollbar] = useState(false);
+
+  useEffect(() => {
+    const checkScroll = () => {
+      if (creatorsScrollRef.current) {
+        setShowCreatorsScrollbar(
+          creatorsScrollRef.current.scrollHeight > creatorsScrollRef.current.clientHeight
+        );
+      }
+    };
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+    const timer = setTimeout(checkScroll, 100);
+    return () => {
+      window.removeEventListener('resize', checkScroll);
+      clearTimeout(timer);
+    };
+  }, [creators, view]);
 
   const handlePhotoClick = () => {
     if (fileInputRef.current) {
@@ -435,38 +457,51 @@ export default function Comunitat() {
                 </button>
               </div>
 
-              {/* Creators Profile List */}
-              <div className="flex flex-col bg-[#fffcf6] min-h-[300px]">
-                {creators.map((creator, index) => (
-                  <div 
-                    key={index}
-                    className="p-5 flex items-center gap-4 text-left border-b-[1.5px] border-black last:border-b-0 bg-[#fffcf6] transition-all duration-200 hover:scale-105 hover:z-10 relative hover:border-[1.5px] hover:border-black hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
-                  >
-                    {/* Rounded Profile Avatar */}
-                    {creator.photo ? (
-                      <div className="w-12 h-12 rounded-full border-2 border-black overflow-hidden flex-shrink-0 bg-neutral-100">
-                        <img src={creator.photo} alt={creator.name} className="w-full h-full object-cover" />
-                      </div>
-                    ) : (
-                      <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center overflow-hidden flex-shrink-0 ${
-                        creator.name === "Maker de fusta." 
-                          ? "border-amber-600 bg-amber-100 text-amber-600" 
-                          : `border-black ${creator.avatarColor || ''}`
-                      }`}>
-                        <User className="w-5 h-5 stroke-[2]" />
-                      </div>
-                    )}
+              {/* Creators Profile List with Custom Scrollbar */}
+              <div className="relative w-full bg-[#fffcf6] overflow-hidden">
+                <div 
+                  ref={creatorsScrollRef} 
+                  className="flex flex-col bg-[#fffcf6] h-[280px] my-3 overflow-y-auto w-full"
+                >
+                  {creators.map((creator, index) => (
+                    <div 
+                      key={index}
+                      className="p-5 flex items-center gap-4 text-left border-b-[1.5px] border-black last:border-b-0 bg-[#fffcf6] hover:bg-[#eae3d2] transition-colors duration-200 relative"
+                    >
+                      {/* Rounded Profile Avatar */}
+                      {creator.photo ? (
+                        <div className="w-12 h-12 rounded-full border-2 border-black overflow-hidden flex-shrink-0 bg-neutral-100">
+                          <img src={creator.photo} alt={creator.name} className="w-full h-full object-cover" />
+                        </div>
+                      ) : (
+                        <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center overflow-hidden flex-shrink-0 ${
+                          creator.name === "Maker de fusta." 
+                            ? "border-amber-600 bg-amber-100 text-amber-600" 
+                            : `border-black ${creator.avatarColor || ''}`
+                        }`}>
+                          <User className="w-5 h-5 stroke-[2]" />
+                        </div>
+                      )}
 
-                    {/* Text Profile: Inline name and description */}
-                    <div className="flex-grow">
-                      <p className="text-xs sm:text-sm text-neutral-800 leading-relaxed">
-                        <span className="font-extrabold text-black mr-1.5">{creator.name}</span>
-                        {creator.description}
-                      </p>
+                      {/* Text Profile: Inline name and description */}
+                      <div className="flex-grow">
+                        <p className="text-xs sm:text-sm text-neutral-800 leading-relaxed">
+                          <span className="font-extrabold text-black mr-1.5">{creator.name}</span>
+                          {creator.description}
+                        </p>
+                      </div>
+
                     </div>
-
-                  </div>
-                ))}
+                  ))}
+                </div>
+                
+                {/* Scrollbar arrows */}
+                {showCreatorsScrollbar && (
+                  <>
+                    <div className="absolute right-0 top-[2px] w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-b-[8px] border-b-black pointer-events-none z-30"></div>
+                    <div className="absolute right-0 bottom-[2px] w-0 h-0 border-l-[5px] border-l-transparent border-r-[5px] border-r-transparent border-t-[8px] border-t-black pointer-events-none z-30"></div>
+                  </>
+                )}
               </div>
 
             </div>
@@ -476,13 +511,21 @@ export default function Comunitat() {
 
         {/* Dynamic Back Button / Enrere */}
         {view !== 'main' && (
-          <div className="flex justify-start w-full mt-6">
+          <div className="flex flex-col items-start gap-3 w-full mt-6">
             <button 
               onClick={handleEnrere}
-              className="font-bold text-xs uppercase tracking-wider text-neutral-500 hover:text-black transition-colors duration-200 py-2 flex items-center gap-1.5 border-none bg-transparent cursor-pointer"
+              className="border-2 border-black bg-[#fffcf6] text-black hover:bg-black hover:text-[#fffcf6] font-bold text-xs uppercase tracking-wider py-2 px-5 flex items-center gap-1.5 transition-colors duration-200 cursor-pointer"
             >
               <span>← Enrere</span>
             </button>
+            {view === 'search_list' && (
+              <button 
+                onClick={() => navigate('/assistant')}
+                className="border-2 border-black bg-[#fffcf6] text-black hover:bg-black hover:text-[#fffcf6] font-bold text-xs uppercase tracking-wider py-2 px-5 flex items-center gap-1.5 transition-colors duration-200 cursor-pointer"
+              >
+                <span>Tornar a l'assistent</span>
+              </button>
+            )}
           </div>
         )}
 
