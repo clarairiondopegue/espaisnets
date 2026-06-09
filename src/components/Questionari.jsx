@@ -322,7 +322,7 @@ const getSafetyText = (titol) => {
             <li>Protecció auditiva (per a la trituradora)</li>
           </ul>
         </div>
-        <p>A més, com que el procés de fusió de plàstics emet gasos, és imprescindible treballar en un espai amb extracció de fums o una ventilació creuada excel·lent.</p>
+        <p>A més, com que el procés de fusió de plàstics emet gasos, és imprescindible treballar en un espai amb extracció de fums o amb bona ventilació.</p>
       </div>
     );
   }
